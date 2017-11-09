@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var name='The window'
+    var object={
+        name:'this is my object',
+        getName:function(){
+           return function(){
+               console.log(this.name)
+           }
+        }
+    };
+    //object.getName().call(object);
+    object.getName()()
+    var name='The window'
+    var object={
+        name:'this is my object',
+        getName:function(){
+            var that=this;
+           return function(){
+               console.log(that.name)
+           }
+        }
+    };
+    object.getName()()
+    //上下文的理解 调用object.getName()的时候this指向object，但是调用里面的时候就没有明确的对象了 因此this指向window.
+    //在第二个方法里面 定义一个变量 that承接object.因此console的that.name实际上是object下的属性
+</script>
+</html>

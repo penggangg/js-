@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+  </ul>  
+</body>
+<script>
+function created (){
+    var arr=new Array();
+    for (var i = 0; i < 10; i++) {
+       arr[i]=function(){
+           return i
+       }
+        
+    }
+   return arr;
+}
+var aa=created();
+console.log(aa[0]())//10
+console.log(aa[1]())//10
+var btn=document.getElementsByTagName('li');
+//建立索引值
+// for (var i = 0; i < btn.length; i++) {
+//     //btn[i].index=i;
+//     btn[i].onclick=function(){
+//         console.log(i);
+//         //当我们打印i值得时候 i值已经循环完了 自然是5 可以通过建立索引来完成
+//         //js事件处理器在线程空闲时间不会运行的,导致最后运行的时候输出的就是i最后的值
+//     }
+    
+// }
+//利用闭包解决
+for (var i = 0; i < btn.length; i++) {      
+    (function(i){
+        btn[i].onclick=function(){
+            console.log(i);
+        
+        }
+    })(i)
+    
+}
+</script>
+</html>
