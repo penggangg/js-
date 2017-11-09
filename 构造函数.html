@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //1.使用Object或对象字面量创建对象 (最基础的方法)
+    var student=new Object();
+    student.name='pg';
+    student.age='20';
+    //或者
+    var student1={
+        name:'pg1',
+        age:'21'
+    }
+    //样看起来似乎就完美了。但是马上我们就会发现一个十分尖锐的问题：当我们要创建同类的student1，student2，…，studentn时，我们不得不将以上的代码重复n次。
+
+
+    //2.工厂模式创建对象   能不能像工厂车间那样，有一个车床就不断生产出对象呢？我们看”工厂模式”。
+    function createStudent(name,age){
+        var obj={
+            name:name,
+            age:age
+        }
+        return obj;
+    }
+    var student2=createStudent('pg2','22');
+    var student3=createStudent('pg3','23');
+    //这样一来我们就可以通过createStudent函数源源不断地”生产”对象了。看起来已经高枕无忧了，但贪婪的人类总有不满足于现状的天性：我们不仅希望”产品”的生产可以像工厂车间一般源源不断，我们还想知道生产的产品究竟是哪一种类型的。
+    //console.log(student2 instanceof Object);
+    //3. 构造函数模式创建对象 
+    function Student(name, age) {
+        this.name = name;
+        this.age = age;
+        this.alertName = function(){
+            alert(this.name)
+        };
+    }
+
+    function Fruit(name, color) {
+        this.name = name;
+        this.color = color;
+        this.alertName = function(){
+            alert(this.name)
+        };
+    }
+    var v1 = new Student("easy", 20);
+    var v2 = new Fruit("apple", "green");
+    // alert(v1 instanceof Student);  //true
+    // alert(v2 instanceof Student);  //false
+    // alert(v1 instanceof Fruit);  //false
+    // alert(v2 instanceof Fruit);  //true
+
+    // alert(v1 instanceof Object);  //true 任何对象均继承自Object
+    // alert(v2 instanceof Object);  //true 任何对象均继承自Object
+    //这样我们就解决了工厂模式无法区分对象类型的尴尬。那么使用构造方法来创建对象是否已经完美了呢？我们知道在JS中，函数是对象。那么，当我们实例化不止一个Student对象的时候：
+    // var v1 = new Student("easy1", 20);
+    // var v2 = new Student("easy2", 20);
+    // ...
+    // var vn = new Student("easyn", 20);
+    //其中共同的alertName()函数也被实例化了n次，我们可以用以下方法来检测不同的Student对象并不共用alertName()函数：
+    //alert(v1.alertName == v2.alertName);  //flase
+    //这无疑是一种内存的浪费。我们知道，this对象是在运行时基于函数的执行环境进行绑定的。在全局函数中，this对象等同于window；在对象方法中，this指向该对象。
+
+    //4.使用原型模型创建对象 
+    function Student(name,age){
+        this.name=name||'小明';
+        this.age=age||12;
+    };
+    // Student.prototype.alertName=function(){
+    //     alert(this.name+'有'+this.age+'岁');
+    // }
+    Student.prototype={
+        constructor : Student,
+        alertName:function(){
+            alert(this.name+'有'+this.age+'岁');
+        }
+    }
+    var stu1=new Student('pg4','25');
+     stu1.alertName();
+    var stu2=new Student('pg5','26');
+    console.log(stu1.alertName==stu2.alertName);//很完美
+
+
+
+
+
+</script>
+</html>
