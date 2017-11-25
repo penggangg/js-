@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .tab_nav,.tab_nav1{
+        width: 600px;
+        height: 600px;
+        margin: 0 auto;
+    }
+    .tab{
+        width: 100%;
+        border-bottom: 1px solid #cccccc;
+        height: 50px;
+        display: flex;
+        justify-content: space-between
+    }
+    .tab span{
+        width: 180px;
+        border: 1px solid #cccccc;
+        display: inline-block;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+    }
+    .tab span.current{
+        background: red;
+        color: #ffffff;
+    }
+    .tab_cot{
+        width: 100%;
+        height: 300px;
+        font-size: 50px;
+        text-align: center;
+        line-height: 300px;
+        display: none;
+        background: #cccccc;
+    }
+    .current1{
+        color: red;
+        font-size: 20px;
+    }
+</style>
+<body>
+    <div class="tab_nav">
+        <div class="tab">
+            <span class="current">tab1</span>
+            <span>tab2</span>
+            <span>tab3</span>
+        </div>
+        <div class="tab_cot" style="display:block;">
+                tab1
+        </div>
+        <div class="tab_cot">
+                tab2
+        </div>
+        <div class="tab_cot">
+                tab3
+        </div>
+        
+    </div>
+    <div class="tab_nav1">
+        <div class="aa">
+            <div class="bb">
+                <span class="current1">1</span>
+                <span>2</span>
+                <span>3</span>
+            </div>
+        </div>
+        <div class="tab_cot" style="display:block;">
+                tab1
+        </div>
+        <div class="tab_cot">
+                tab2
+        </div>
+        <div class="tab_cot">
+                tab3
+        </div>
+        
+    </div>
+</body>
+<script src="./static/js/jquery-2.1.4.min.js"></script>
+<script src="./static/js/extend.js"></script>
+<script>
+     $('.tab_nav').tab();
+     $('.tab_nav1').tab(
+         {
+            eventType:"mouseover",
+            tabNav:'.bb>span',
+            currentClass:'current1'
+         }
+     );
+</script>
+</html>
