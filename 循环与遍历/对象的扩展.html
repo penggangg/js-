@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var json = {
+        "a": "a",
+        "b": "b",
+        "c": {
+            "d": ['1', '2', '3'],
+            "e": ['11','22','33']
+        }
+    };
+    function iterJson(json){
+    for(var key in json){
+        if(json[key] && typeof json[key] == 'object'){
+            iterJson(json[key]);
+        }else{
+            //console.log(json[key])  
+        }
+    }
+    }
+    iterJson(json);//对象的深度遍历  递归大法
+    //
+    //Object.create();//的使用
+    function Car(desc){
+        this.desc=desc;
+        this.name='pggg';
+    }
+    Car.prototype={
+        move:function(){
+            console.log(this)
+            return this.name+this.desc;
+        }
+    };
+    //实现继承 1
+    // var s_car=Object.create(Car.prototype);
+    // s_car.name='small_car';
+    // s_car.desc='s_car';
+    //实现继承 2
+    // function Scar(desc){
+    //     Car.call(this,desc)
+    // };
+    // Scar.prototype=new Car();
+    // var s_car=new Scar('小车');
+    //s_car.move();
+    //实现继承3
+    function S_car(){
+
+    };
+    S_car.prototype=Object.create(Car.prototype);
+    S_car.prototype.constructor=S_car;
+    S_car.prototype.desc='small_car';
+    var s_car=new S_car();
+    console.log(s_car.move());
+    //当为构造函数的时候的继承,传的是函数的原型。
+
+</script>
+</html>

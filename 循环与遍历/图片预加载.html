@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box1{
+        /* background-image:url(http://timage.lizihang.com/group1/M00/0A/95/rBAOKFjOO4iEddcHAAAAAARmHzA595.jpg.900x600.wbp.jpg); */
+        width: 300px;
+        height: 200px;
+        /* display: none; */
+    }
+    .pg_img img{
+        width: 600px;
+    }
+    li{
+list-style:none;
+margin-bottom:10px;
+display:inline-block;
+}
+
+ul > li:not(:last-child)::after {
+  content: ",";
+}
+</style>
+<body>
+    <div class="box3" style="pointer-events:none">12313123</div>
+    <button>点击图片</button>
+    <div class="img_cot"></div>
+    <div class="pg_img">
+        <img src="http://image.lizihang.com/group1/M00/0D/38/rBAOKFob6_OEbANJAAAAAI_jzUo943.jpg.900x600.wbp.jpg" alt="" srcset="">
+    </div>
+    <img data-src="http://image.lizihang.com/group1/M00/0D/08/rBAOKFoDujeEd7GNAAAAAB-4edE125.jpg.300x200.jpg" alt="" style="display:none">
+    <div class="box1"> </div>
+    
+    <input type="checkbox" name="123" id="">
+    <input type="checkbox" name="1231" id="">
+    <input type="checkbox" name="1223" id="">
+    <input type="checkbox" name="1233" id="">
+    <input type="checkbox" name="1234" id="">
+    <input type="file" class="file">
+    <ul class="nav">
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+    </ul>
+    <progress value="11" max="100"></progress> 
+</body>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script>
+   $('.box3').click(function(){
+       console.log(123213)
+   })
+    var src_arr=[];
+    function preLoadImg(...url){
+        return new Promise(function(resolve,reject){
+            url.map((item,key)=>{
+             var img=new Image();
+             img.src=item;
+             img.onload = function() {
+                 resolve(img)
+             }
+             img.onerror =function() {
+                 reject('报错了')
+             }
+             
+            })
+        }) 
+    };
+    preLoadImg('http://image.lizihang.com/group1/M00/0D/08/rBAOKFoDujeEd7GNAAAAAB-4edE125.jpg.300x200.jpg').then(res=>{
+        // src_arr.push(item)
+        console.log(res)
+    }).catch(error=>{
+        console.log(error)
+    });
+    // $('button').click(function(){
+    //     var str=src_arr.map((item,key)=>`<img src=${item}>`).join('');
+    //     $('.img_cot').html(str);
+    // });
+    // var Type='mm';
+    // var str='<b onclick="Show(\''+Type+'\')">dianji</b>';
+    // $('.box1').html(str);
+    // function Show(item){
+    //     console.log(item)
+    // }
+    var aa=10;
+    // setInterval(function(){
+    //     aa++;
+    //     $('progress').val(aa);
+    // },100)
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    
+</style>
+<body>
+</body>
+<script>
+    var obj = {
+
+        a: function () {
+            console.log(100)
+        },
+        b: function () {
+            console.log(200)
+        },
+        c: function () {
+            console.log(300)
+        }
+
+    }
+
+    var newObj = {};
+
+    newObj = Object.create(obj, {
+        t1: {
+            value: 'yupeng',
+            writable: true
+        },
+        bar: {
+            configurable: false,
+            get: function () {
+                return bar;
+            },
+            set: function (value) {
+                bar = value
+            }
+        }
+
+    })
+    //当为对象的时候 就是2个参数 第一个参数就是要继承的对象 第二个选填 若无 则是相当于对象的复制。
+    console.log(newObj)
+    newObj.a();
+    console.log(newObj.t1);
+    newObj.t1 = 'yupeng1'
+    console.log(newObj.t1);
+    newObj.bar = 201;
+    console.log(newObj.bar);
+    newObj.aa=1111;
+    console.log(newObj.aa);
+
+
+    function Parent() { }
+    var parent = new Parent();
+    var child = Object.create(parent, {
+            dataDescriptor: {
+            value: "This property uses this string as its value.",
+            writable: true,
+            enumerable: true
+            },
+            accessorDescriptor: {
+            get: function () { return "I am returning: " + accessorDescriptor; },
+            set: function (val) { accessorDescriptor = val; },
+            configurable: true
+            }
+        });
+
+    child.accessorDescriptor = 'YUPENG';
+    console.log(child.dataDescriptor);
+</script>
+
+</html>

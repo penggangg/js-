@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        height: 2000px;
+    }
+</style>
+<body>
+    
+</body>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script>
+    //最基础的函数节流
+    // window.onresize=function(){
+    //     throttle(resizeHandler,window);
+    // };
+    function Common(){
+
+    };
+    Common.prototype={
+        resizeHandler:function(name){
+            console.log(name);
+        },
+        throttle:function(method,delay,duration,name){
+            var timer=null,begin=new Date();
+            return function(){
+                var context=this,args=name,current=new Date();
+                clearTimeout(timer);
+                if(current-begin>=duration){
+                    method.apply(context,args);
+                    begin=current;
+                }else{
+                    timer=setTimeout(function(){
+                        method.apply(context,args);
+                    },delay)
+                }
+            }
+        }
+    }
+    
+    // function throttle(method,context){
+    //     clearTimeout(method.tId);
+    //     method.tId=setTimeout(function(){
+    //         method.call(context);
+    //     },500);
+    // }; 缺点在于 每次都是要等500ms才会执行 。现在优化一下
+    var common=new Common();
+    // window.onresize=;
+    var aa=common.throttle(common.resizeHandler,100,200,['哈哈']);
+    $(window).scroll(function(){
+        aa();
+    })
+    
+</script>
+</html>
